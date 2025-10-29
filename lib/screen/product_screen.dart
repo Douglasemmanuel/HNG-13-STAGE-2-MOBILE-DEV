@@ -17,14 +17,26 @@ class ProductScreen extends StatelessWidget {
      final product = getProductById(productId);
      return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-        product.productName ,
-        style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 24.0,
-          ),
-        )),
+  centerTitle: true,
+  title: Text(
+    product.productName,
+    style: const TextStyle(
+      fontWeight: FontWeight.bold,
+      fontSize: 24.0,
+    ),
+  ),
+  leading: IconButton(
+    icon: const Icon(Icons.arrow_back),
+    onPressed: () {
+      // Navigate to the initial screen and clear all previous routes
+      Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
+        RouteGenerator.initial,
+        (route) => false,
+      );
+    },
+  ),
+)
+,
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -82,7 +94,7 @@ class ProductScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "\₦${product.price.toStringAsFixed(2)}",
+                      "₦${product.price.toStringAsFixed(2)}",
                       style: const TextStyle(
                           fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -98,33 +110,95 @@ class ProductScreen extends StatelessWidget {
             ),
 
             const SizedBox(height: 12),
+            Row(
+  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  children: [
+    // First button (Edit)
+    ElevatedButton.icon(
+      onPressed: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Edit ${product.productName}")),
+        );
+        Navigator.of(context, rootNavigator: true).pushNamed(
+          RouteGenerator.editproduct,
+          arguments: productId,
+        );
+      },
+      icon: const Icon(Icons.edit, color: Colors.white),
+      label: Text(
+        "Edit ${product.productName}",
+        style: const TextStyle(color: Colors.white),
+      ),
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+        textStyle: const TextStyle(fontSize: 16),
+        backgroundColor: const Color(0xFF1E3A8A),
+      ),
+    ),
+
+    // Second button (Delete with AlertDialog)
+    ElevatedButton.icon(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text("Confirm Delete"),
+              content: Text("Are you sure you want to delete ${product.productName}?"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // close dialog
+                  },
+                  child: const Text("Cancel"),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF1E3A8A),
+                    
+                  ),
+                  onPressed: () {
+                   Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
+                   RouteGenerator.initial,
+                    (route) => false,
+                         );
+
+                    // Your delete logic here:
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text("${product.productName} deleted")),
+                    );
+
+                    // Example: call delete function
+                    // deleteProduct(productId);
+                  },
+                  child: const Text(
+                    "Yes, Delete" , 
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    ),
+                ),
+              ],
+            );
+          },
+        );
+      },
+      icon: const Icon(Icons.delete, color: Colors.white),
+      label: const Text(
+        "Delete",
+        style: TextStyle(color: Colors.white),
+      ),
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+        textStyle: const TextStyle(fontSize: 16),
+        backgroundColor: Colors.redAccent,
+      ),
+    ),
+  ],
+)
 
             
-            ElevatedButton.icon(
-              onPressed: () {
-                
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text("Edit ${product.productName}")),
-                );
-                 Navigator.of(context, rootNavigator: true).pushNamed(
-                      RouteGenerator.editproduct, 
-                      arguments: productId     
-                    );
-              },
-              // icon: const Icon(Icons.edit),
-              label: Text(
-                "Edit ${product.productName}" ,
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-                ),
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 14),
-                textStyle: const TextStyle(fontSize: 16),
-                backgroundColor: Color(0xFF1E3A8A),
-                
-              ),
-            ),
+           
           ],
         ),
       ),

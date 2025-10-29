@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:store_keeper_app/models/store_models.dart' ;
 import 'package:store_keeper_app/data/products_data.dart' ;
 import 'package:store_keeper_app/utils/route_generator.dart';
-import 'package:store_keeper_app/providers/store_provider.dart';
 import 'package:store_keeper_app/utils/responsive_breakpoints.dart';
 import 'package:store_keeper_app/widgets/component/Single_product_card.dart' ;
 class HomeScreen extends StatelessWidget {

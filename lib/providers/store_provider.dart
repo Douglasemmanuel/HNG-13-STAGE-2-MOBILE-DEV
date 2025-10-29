@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/legacy.dart';
 import 'package:store_keeper_app/models/store_models.dart' ;
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 
 class ProductNotifier extends StateNotifier<List<Product>>{

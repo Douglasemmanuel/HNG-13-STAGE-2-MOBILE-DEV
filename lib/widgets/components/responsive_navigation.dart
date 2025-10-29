@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:store_keeper_app/utils/route_generator.dart' ;
 import 'package:store_keeper_app/utils/responsive_breakpoints.dart' ;
 import 'package:store_keeper_app/screen/home_screen.dart' ;
-import 'package:store_keeper_app/screen/create_scren.dart' ;
+import 'package:store_keeper_app/screen/create_screen.dart' ;
 import 'package:store_keeper_app/screen/search_screen.dart' ;
 
 class ResponsiveNavigation extends StatefulWidget {
@@ -27,7 +27,7 @@ class _ResponsiveNavigationState extends State<ResponsiveNavigation> {
       label: 'Create',
       icon: Icons.add_outlined,
       selectedIcon: Icons.add,
-      page: CreateScren(),
+      page: CreateScreen(),
     ),
     AppDestination(
       label: 'Search',

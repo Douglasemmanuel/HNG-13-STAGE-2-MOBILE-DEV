@@ -2,12 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:store_keeper_app/screen/home_screen.dart' ;
 import 'package:store_keeper_app/screen/start_screen.dart' ;
-import 'package:store_keeper_app/screen/create_scren.dart' ;
 import 'package:store_keeper_app/screen/search_screen.dart' ;
 import 'package:store_keeper_app/widgets/components/responsive_navigation.dart';
 import 'package:store_keeper_app/screen/edit_screen.dart' ;
 import 'package:store_keeper_app/screen/product_screen.dart' ;
 import 'package:store_keeper_app/screen/all_screen.dart' ;
+import 'package:store_keeper_app/screen/create_screen.dart' ;
 class RouteGenerator {
   static const String initial = '/';
   static const String home = '/home';
@@ -25,7 +25,7 @@ class RouteGenerator {
       case home:
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case create:
-        return MaterialPageRoute(builder: (_) => CreateScren());
+        return MaterialPageRoute(builder: (_) => CreateScreen());
       case search:
         return MaterialPageRoute(builder: (_) => SearchScreen());
       case all:
