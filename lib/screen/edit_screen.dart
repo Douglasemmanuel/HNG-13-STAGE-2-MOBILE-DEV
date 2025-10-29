@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:store_keeper_app/providers/store_provider.dart';
-class CreateScren extends StatelessWidget {
-  const CreateScren({super.key});
+
+class EditScreen extends StatelessWidget {
+  final  String productId ;
+  const EditScreen({super.key , required this.productId});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+   return Scaffold(
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          'Create Product',
+          'Edit Product',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 24.0,
           ),
         ),
       ),
-      body: Center(
-        child: Text('Create Screen'),
+      body: SingleChildScrollView(
+        child: Center(
+          child: Text(' Edit Product'),
+        ),
       ),
     );
   }

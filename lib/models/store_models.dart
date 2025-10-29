@@ -1,4 +1,5 @@
 class Product {
+  final String id ;
   final String productName;
   final int quantity;
   final double price;
@@ -9,6 +10,7 @@ class Product {
     required this.quantity,
     required this.price,
     this.imageUrl,
+    required this.id
   });
 
   // Convert a Product into a Map for JSON or database storage
@@ -18,6 +20,7 @@ class Product {
       'quantity': quantity,
       'price': price,
       'imageUrl': imageUrl,
+      'id':id
     };
   }
 
@@ -28,6 +31,7 @@ class Product {
       quantity: map['quantity'] ?? 0,
       price: (map['price'] ?? 0).toDouble(),
       imageUrl: map['imageUrl'],
+      id : map['id'] ,
     );
   }
 
@@ -40,12 +44,14 @@ class Product {
     int? quantity,
     double? price,
     String? imageUrl,
+    String ? id,
   }) {
     return Product(
       productName: productName ?? this.productName,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
       imageUrl: imageUrl ?? this.imageUrl,
+      id : id ?? this.id ,
     );
   }
 }
