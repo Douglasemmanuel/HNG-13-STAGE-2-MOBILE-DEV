@@ -23,7 +23,7 @@ A Flutter-based mobile and web application to manage products in a store. The ap
 ## Demo
 
 * **Video Demonstration:**
-  Watch the full workflow of the app in action: [Demo Video](https://yourvideolink.com)
+  Watch the full workflow of the app in action: [Demo Video](https://drive.google.com/file/d/1mSIGAUyO566xZPMZ216OiLVN8l4TYb7-/view?usp=sharing)
 
 ---
 
@@ -32,27 +32,27 @@ A Flutter-based mobile and web application to manage products in a store. The ap
 *(Replace these with your own app screenshots)*
 
 * **Create Product Screen**
-  <img src="assets/images/createproduct.jpeg" alt="Main Screen" width="400"/>
+  <img src="assets/images/createproduct.jpeg" alt="Main Screen" width="400" height="200"/>
 
 * **Product Details Screen**
-  <img src="assets/images/productDetails.jpeg" alt="Main Screen" width="400"/>
+  <img src="assets/images/productDetails.jpeg" alt="Main Screen" width="400" height="200"/>
 
 * **Edit Product Screen**
-  <img src="assets/images/editproduct.jpeg" alt="Main Screen" width="400"/>
+  <img src="assets/images/editproduct.jpeg" alt="Main Screen" width="400" height="200"/>
 * **Search Product Screen**
-  <img src="assets/images/searchproducts.jpeg" alt="Main Screen" width="400"/>
+  <img src="assets/images/searchproducts.jpeg" alt="Main Screen" width="400" height="200"/>
 
 * **Home Details Screen**
-  <img src="assets/images/homescreen.jpeg" alt="Main Screen" width="400"/>
+  <img src="assets/images/homescreen.jpeg" alt="Main Screen" width="400" height="200"/>
 
 * **All Product Screen**
-  <img src="assets/images/allproducts.jpeg" alt="Main Screen" width="400"/>
+  <img src="assets/images/allproducts.jpeg" alt="Main Screen" width="400" height="200"/>
 
 ---
 
 ## Deployed App
 
-Try the deployed web version of the app: [Live App Link](https://your-deployed-link.com)
+Try the deployed web version of the app: [Live App Link](https://appetize.io/app/b_xdmeahrvxtfrct7jo2gxkrbg5i)
 
 ---
 
