@@ -38,7 +38,7 @@ A Flutter-based mobile and web application to manage products in a store. The ap
   <img src="assets/images/productDetails.jpeg" alt="Main Screen" width="400"/>
 
 * **Edit Product Screen**
-  <img src="assets/images/startquiz.jpeg" alt="Main Screen" width="400"/>
+  <img src="assets/images/editproduct.jpeg" alt="Main Screen" width="400"/>
 * **Search Product Screen**
   <img src="assets/images/searchproducts.jpeg" alt="Main Screen" width="400"/>
 
