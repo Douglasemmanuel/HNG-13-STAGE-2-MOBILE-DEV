@@ -32,21 +32,21 @@ A Flutter-based mobile and web application to manage products in a store. The ap
 *(Replace these with your own app screenshots)*
 
 * **Create Product Screen**
-  <img src="assets/images/createproduct.jpeg" alt="Main Screen" width="400" height="200"/>
+  <img src="assets/images/createproduct.jpeg" alt="Main Screen" width="400" height="500"/>
 
 * **Product Details Screen**
-  <img src="assets/images/productDetails.jpeg" alt="Main Screen" width="400" height="200"/>
+  <img src="assets/images/productDetails.jpeg" alt="Main Screen" width="400" height="500"/>
 
 * **Edit Product Screen**
-  <img src="assets/images/editproduct.jpeg" alt="Main Screen" width="400" height="200"/>
+  <img src="assets/images/editproduct.jpeg" alt="Main Screen" width="400" height="500"/>
 * **Search Product Screen**
-  <img src="assets/images/searchproducts.jpeg" alt="Main Screen" width="400" height="200"/>
+  <img src="assets/images/searchproducts.jpeg" alt="Main Screen" width="400" height="500"/>
 
 * **Home Details Screen**
-  <img src="assets/images/homescreen.jpeg" alt="Main Screen" width="400" height="200"/>
+  <img src="assets/images/homescreen.jpeg" alt="Main Screen" width="400" height="500"/>
 
 * **All Product Screen**
-  <img src="assets/images/allproducts.jpeg" alt="Main Screen" width="400" height="200"/>
+  <img src="assets/images/allproducts.jpeg" alt="Main Screen" width="400" height="500"/>
 
 ---
 
