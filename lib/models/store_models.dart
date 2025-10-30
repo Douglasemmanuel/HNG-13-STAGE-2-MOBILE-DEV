@@ -1,57 +1,63 @@
 class Product {
-  final String id ;
-  final String productName;
+  final String id;
+  final String productName; // in the app
   final int quantity;
   final double price;
-  final String? imageUrl; // Optional image field
+  final String? image; 
+  final DateTime createdAt;
 
   Product({
     required this.productName,
     required this.quantity,
     required this.price,
-    this.imageUrl,
-    required this.id
+    required this.image,
+    required this.id,
+    required this.createdAt,
   });
 
-  // Convert a Product into a Map for JSON or database storage
+  // Convert Product to Map (for sqflite)
   Map<String, dynamic> toMap() {
     return {
-      'productName': productName,
+      'id': id,
+      'name': productName, // ✅ match DB column
       'quantity': quantity,
       'price': price,
-      'imageUrl': imageUrl,
-      'id':id
+      'image': image  ?? '',
+      'createdAt': createdAt.toIso8601String(), // store DateTime as String
+      // 'category' can be added here if you expand your model
     };
   }
 
-  // Create a Product from a Map (e.g. from Firestore or local DB)
+  // Create Product from Map (from sqflite)
   factory Product.fromMap(Map<String, dynamic> map) {
     return Product(
-      productName: map['productName'] ?? '',
+      id: map['id'] ?? '',
+      productName: map['name'] ?? '', // ✅ match DB column
       quantity: map['quantity'] ?? 0,
       price: (map['price'] ?? 0).toDouble(),
-      imageUrl: map['imageUrl'],
-      id : map['id'] ,
+      image: map['image'],  // nullable
+      createdAt: map['createdAt'] != null 
+          ? DateTime.parse(map['createdAt'])
+          : DateTime.now(),
     );
   }
 
-  // Optional: JSON serialization
-  String toJson() => toMap().toString();
-
-  // Optional: CopyWith method to modify specific fields
+  // Copy with method
   Product copyWith({
     String? productName,
     int? quantity,
     double? price,
-    String? imageUrl,
-    String ? id,
+    String? image,
+    String? id,
+    DateTime? createdAt,
   }) {
     return Product(
       productName: productName ?? this.productName,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
-      imageUrl: imageUrl ?? this.imageUrl,
-      id : id ?? this.id ,
+      image: image ?? this.image,
+      id: id ?? this.id,
+      createdAt: createdAt ?? this.createdAt,
     );
   }
 }

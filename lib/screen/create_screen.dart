@@ -1,14 +1,17 @@
+
+
+
 import 'package:flutter/material.dart';
 import 'package:store_keeper_app/widgets/component/product_form.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io' show File, Platform;
 import 'package:file_picker/file_picker.dart';
-import 'dart:typed_data'; 
+import 'dart:convert'; 
 import 'package:flutter/foundation.dart';
-import 'dart:math'; 
-import 'package:store_keeper_app/utils/route_generator.dart' ;
-import 'package:store_keeper_app/models/store_models.dart' ;
-
+import 'package:store_keeper_app/utils/route_generator.dart';
+import 'package:store_keeper_app/models/store_models.dart';
+import 'package:store_keeper_app/services/database_provider.dart'; 
+import 'package:uuid/uuid.dart'; 
 
 class CreateScreen extends StatefulWidget {
   const CreateScreen({super.key});
@@ -32,15 +35,16 @@ class _CreateScreenState extends State<CreateScreen> {
 
   late String _productId;
 
+  final ProductServices _productServices = ProductServices(); // <-- use sqflite service
+  final Uuid _uuid = const Uuid(); // <-- UUID generator
+
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController();
     _priceController = TextEditingController();
     _quantityController = TextEditingController();
-
-    // Generate random product ID
-    _productId = _generateRandomId();
+    _productId = _uuid.v4(); // Generate UUID
   }
 
   @override
@@ -49,12 +53,6 @@ class _CreateScreenState extends State<CreateScreen> {
     _priceController.dispose();
     _quantityController.dispose();
     super.dispose();
-  }
-
-  String _generateRandomId() {
-    final random = Random();
-    final number = random.nextInt(100000); // random number up to 99999
-    return 'pre$number';
   }
 
   Future<void> _pickImage({required bool fromCamera}) async {
@@ -83,47 +81,62 @@ class _CreateScreenState extends State<CreateScreen> {
     }
   }
 
-// Global list to store products (replace with DB later)
-final List<Map<String, Object?>> products = [];
+  Future<void> _saveProduct() async {
+  if (!_formKey.currentState!.validate()) return;
 
-void _saveProduct() {
-  if (_formKey.currentState!.validate()) {
-    final name = _nameController.text.trim();
-    final price = double.tryParse(_priceController.text.trim()) ?? 0.0;
-    final quantity = int.tryParse(_quantityController.text.trim()) ?? 0;
+  final name = _nameController.text.trim();
+  final price = double.tryParse(_priceController.text.trim()) ?? 0.0;
+  final quantity = int.tryParse(_quantityController.text.trim()) ?? 0;
 
-    final newProduct = {
-      "id": _productId,
-      "name": name,
-      "price": price,
-      "quantity": quantity,
-      "image": _selectedImage ?? _selectedImageBytes, // can be null
-    };
+  // 🚫 No base64 conversion
+  String? imagePath;
+  Uint8List? imageBytes;
 
-    _updateDatabase(newProduct);
+  if (_selectedImage != null) {
+    imagePath = _selectedImage!.path; // store path (mobile)
+  } else if (_selectedImageBytes != null) {
+    imageBytes = _selectedImageBytes; // keep bytes (web)
+  }
 
-    if (_selectedImage == null && _selectedImageBytes == null) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    const SnackBar(content: Text("Please select a product image")),
-  );
-  return;
-}
+  setState(() => _isLoading = true);
 
+  try {
+    final product = Product(
+      id: _productId,
+      productName: name,
+      price: price,
+      quantity: quantity,
+      image: imagePath ?? '', // ✅ store path, not base64
+      createdAt: DateTime.now(),
+      // If your model supports bytes, you can add another field for web here.
+    );
 
-    // Navigate to Product Screen using the product ID and prevent back navigation
+    await _productServices.addProduct(product);
+
+    // Reset form
+    _nameController.clear();
+    _priceController.clear();
+    _quantityController.clear();
+
+    setState(() {
+      _selectedImage = null;
+      _selectedImageBytes = null;
+      _productId = _uuid.v4();
+      _isLoading = false;
+    });
+
     Navigator.of(context, rootNavigator: true).pushReplacementNamed(
       RouteGenerator.product,
-      arguments: _productId,
+      arguments: product.id,
+    );
+  } catch (e) {
+    setState(() => _isLoading = false);
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Failed to save product: $e")),
     );
   }
 }
 
-void _updateDatabase(Map<String, Object?> data) {
-  // Add to the in-memory product list
-  products.add(data);
-  debugPrint("Product created: $data");
-  debugPrint("All products: $products");
-}
 
   @override
   Widget build(BuildContext context) {

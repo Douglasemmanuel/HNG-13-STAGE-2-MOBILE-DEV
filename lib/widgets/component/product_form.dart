@@ -2,9 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart'; // kIsWeb
 import 'dart:io' show File, Platform; // only safe if not on web
-import 'package:file_picker/file_picker.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:typed_data'; // for web image bytes
+// for web image bytes
 
 class ProductForm extends StatelessWidget {
   final GlobalKey<FormState> formKey;

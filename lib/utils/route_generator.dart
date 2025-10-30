@@ -1,7 +1,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:store_keeper_app/screen/home_screen.dart' ;
-import 'package:store_keeper_app/screen/start_screen.dart' ;
 import 'package:store_keeper_app/screen/search_screen.dart' ;
 import 'package:store_keeper_app/widgets/components/responsive_navigation.dart';
 import 'package:store_keeper_app/screen/edit_screen.dart' ;
